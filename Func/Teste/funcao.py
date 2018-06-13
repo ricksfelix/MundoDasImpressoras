@@ -1,0 +1,20 @@
+from tkinter import *
+
+def cadastro():
+    gui = Tk()
+    gui.title('Cadastrar Cliente')
+    lb_client = Label(gui,text='Nome do Cliente: ')
+    lb_cel = Label(gui,text='Celular: ')
+    lb_tel = Label(gui,text='Telefone: ')
+    et_client = Entry(gui)
+    et_cel = Entry(gui)
+    et_tel = Entry(gui)
+    bt_register = Button(gui, text='Cadastrar Equipamento')
+    lb_client.grid(row=0, column=0)
+    lb_cel.grid(row=1, column=0)
+    lb_tel.grid(row=2, column=0)
+    et_client.grid(row=0, column=1)
+    et_cel.grid(row=1, column=1)
+    et_tel.grid(row=2, column=1)
+    bt_register.grid(row=3, columnspan=2)
+    gui.mainloop()
