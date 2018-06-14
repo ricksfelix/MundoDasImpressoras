@@ -51,27 +51,51 @@ def menu_list(user):
             ns = et_ns.get()
             acessorios = et_acessorios.get()
             defeito = et_defeito.get()
-            gen = '''
-        <html>
-        <head>
-            <title>Equipamento: "{}"</title>
-            <meta charset="UTF-8"/>
-        </head>
-        <body>
-            <h1>{}</h1>
-            <h1>Equipamento: {}</h1>
-            <h2>Modelo: {}</h2>
-            <h2>Cor: {}</h2>
-            <h2>Numero de Serie: {}</h2>
-            <h2>Acessorios: {}</h2>
-            <h2>Defeito: {}</h2>
-            <h1>QRCODE</h1>
-            <img src="QR_LIST/{}{}.png">
-        </body>
-        </html>
-        '''.format(equipamento, data, equipamento, modelo, cor, ns, acessorios, defeito, equipamento, modelo)
-            os.system('cd /home/haise/Servidor/QR_LIST && qr {}.html >> {}{}.png'.format(link, equipamento, modelo))
-            os.system('cd /home/haise/Servidor && echo "{}" >> {}.html'.format(gen, equipamento))
+            if equipamento == '':
+                lb_result['text'] = 'É Obrigatorio Preencher o *Equipamento*'
+                lb_result['fg'] = 'red'
+            else:
+                if modelo == '':
+                    lb_result['text'] = 'É Obrigatorio Preencher o *Modelo*'
+                    lb_result['fg'] = 'red'
+                else:
+                    if cor == '':
+                        lb_result['text'] = 'É Obrigatorio Preencher a *Cor*'
+                        lb_result['fg'] = 'red'
+                    else:
+                        if ns == '':
+                            lb_result['text'] = 'É Obrigatorio Preencher o *Numero de Serie*'
+                            lb_result['fg'] = 'red'
+                        else:
+                            if defeito == '':
+                                lb_result['text'] = 'É Obrigatorio Especificar o Defeito!'
+                                lb_result['fg'] = 'red'
+                            else:
+                                lb_result['text'] = 'Cadastrado com Sucesso'
+                                lb_result['fg'] = 'green'
+                                if acessorios == '':
+                                    acessorios = 'Sem Acessorios'
+                                    gen = '''
+                                    <html>
+                                    <head>
+                                        <title>Equipamento: "{}"</title>
+                                        <meta charset="UTF-8"/>
+                                    </head>
+                                    <body>
+                                        <h1>{}</h1>
+                                        <h1>Equipamento: {}</h1>
+                                        <h2>Modelo: {}</h2>
+                                        <h2>Cor: {}</h2>
+                                        <h2>Numero de Serie: {}</h2>
+                                        <h2>Acessorios: {}</h2>
+                                        <h2>Defeito: {}</h2>
+                                        <h1>QRCODE</h1>
+                                        <img src="QR_LIST/{}{}.png">
+                                    </body>
+                                    </html>
+                                    '''.format(equipamento, data, equipamento, modelo, cor, ns, acessorios, defeito, equipamento, modelo)
+                                    os.system('cd /home/haise/Servidor/QR_LIST && qr {}.html >> {}{}.png'.format(link, equipamento, modelo))
+                                    os.system('cd /home/haise/Servidor && echo "{}" >> {}.html'.format(gen, equipamento))
 
         gui.title('Cadastrar Equipamento')
         lb_equipamento = Label(gui, text='Equipamento:')
@@ -87,6 +111,7 @@ def menu_list(user):
         et_ns = Entry(gui)
         et_acessorios = Entry(gui)
         et_defeito = Entry(gui)
+        lb_result = Label(gui, text='')
 
         bt_cadastrar = Button(gui, text='Cadastrar', command=cad_eqp)
 
@@ -103,8 +128,8 @@ def menu_list(user):
         et_ns.grid(row=3, column=1)
         et_acessorios.grid(row=4, column=1)
         et_defeito.grid(row=5, column=1)
-
-        bt_cadastrar.grid(row=6, columnspan=2)
+        lb_result.grid(row=6, columnspan=2)
+        bt_cadastrar.grid(row=7, columnspan=2)
 
         gui.mainloop()
 
