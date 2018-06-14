@@ -1,4 +1,5 @@
-import MySQLdb
+import sqlite3
+con = sqlite3.connect("database.db")
+c = con.cursor()
 
-def login():
-    return print('huehue')
+#def login(user, passw):

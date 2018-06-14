@@ -1,6 +1,5 @@
 from tkinter import *
 from Func import menu
-
 def register():
     user = et_user.get()
     passw = et_passw.get()
