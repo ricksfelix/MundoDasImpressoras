@@ -1,11 +1,14 @@
 from tkinter import *
 from Func import menu
+
+
 def register():
     user = et_user.get()
     passw = et_passw.get()
     if (user, passw) == ('', ''):
         lb_result['text'] = 'Preencha os Campos'
         lb_result['fg'] = 'red'
+
 
 def login():
     user = et_user.get()
@@ -23,6 +26,8 @@ def login():
         else:
             lb_result['text'] = 'Usuario ou Senha errados!'
             lb_result['fg'] = 'red'
+
+
 gui = Tk()
 lb_user = Label(gui, text='User: ')
 lb_passw = Label(gui, text='Passw: ')
